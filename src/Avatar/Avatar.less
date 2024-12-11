@@ -1,0 +1,17 @@
+@class-prefix-avatar: ~'adm-avatar';
+
+.@{class-prefix-avatar} {
+    --size: var(--adm-avatar-size, 44px);
+    --border-radius: var(--adm-avatar-border-radius, 4px);
+
+    border-radius: var(--border-radius);
+    &.adm-image {
+        --width: var(--size);
+        --height: var(--size);
+    }
+    &-fallback {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+}
