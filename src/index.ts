@@ -39,6 +39,35 @@ export type { CardProps } from './Card';
 export { default as List } from './List';
 export type { ListProps,ListRef,ListItemProps } from './List';
 
+export { default as PageIndicator } from './PageIndicator';
+export type { PageIndicatorProps } from './PageIndicator';
+
+
+export { default as Steps } from './Steps';
+export type { StepsProps ,StepProps } from './Steps';
+
+export { default as Mask } from './Mask';
+export type { MaskProps } from './Mask';
+
+export { default as SpinLoading } from './SpinLoading';
+export type { SpinLoadingProps } from './SpinLoading';
+
+export { default as Toast } from './Toast';
+export type {  ToastShowProps, ToastHandler  } from './Toast';
+
+export { default as Tag } from './Tag';
+export type { TagProps } from './Tag';
+
+export { default as WaterMark } from './WaterMark';
+export type { WaterMarkProps } from './WaterMark';
+
+export { default as Footer } from './Footer';
+export type { FooterProps,ChipItem,LinkItem } from './Footer';
+
+
+
+
+
 
 
 

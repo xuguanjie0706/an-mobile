@@ -5,7 +5,7 @@ import { mergeProps } from 'an-mobile/utils/with-default-props';
 import './Divider.less';
 const classPrefix = 'adm-divider';
 
-type DividerProps = {
+export type DividerProps = {
     children?: React.ReactNode;
     contentPosition?: 'left' | 'right' | 'center';
     direction?: 'horizontal' | 'vertical';
