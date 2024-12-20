@@ -5,7 +5,12 @@ import { Locale } from "../locales/base"
 type Config = {
     locale: Locale;
     theme?: 'light' | 'dark';
-   
+    input?: {
+        clearIcon?: ReactNode
+      }
+    popup?: {
+    destroyOnClose?: boolean
+    }
 }
 
 

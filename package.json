@@ -83,10 +83,13 @@
     "ahooks": "^3.8.4",
     "antd-mobile-icons": "^0.3.0",
     "classnames": "^2.5.1",
+    "deepmerge": "^4.3.1",
     "jest": "^29.7.0",
     "less": "^4.2.1",
     "less-loader": "^12.2.0",
     "lorem-ipsum": "^2.0.8",
+    "rc-field-form": "^2.7.0",
+    "react-is": "^19.0.0",
     "staged-components": "^1.1.3"
   }
 }

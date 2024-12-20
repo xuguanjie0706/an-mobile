@@ -2,8 +2,6 @@
 import './global'
 
 
-
-// export { default as Foo } from './Foo';
 export { default as Button } from './Button';
 export type { ButtonProps ,ButtonRef} from './Button';
 
@@ -63,6 +61,13 @@ export type { WaterMarkProps } from './WaterMark';
 
 export { default as Footer } from './Footer';
 export type { FooterProps,ChipItem,LinkItem } from './Footer';
+
+export { default as Input } from './Input';
+export type { InputProps } from './Input';
+
+export { default as Popup } from './Popup';
+export type { PopupProps } from './Popup';
+
 
 
 

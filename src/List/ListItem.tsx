@@ -17,6 +17,7 @@ export type ListItemProps = {
     clickable?:boolean,
     showArrow?:boolean,
     arrowIcon?:ReactNode,
+    arrow?: boolean | ReactNode
     onClick?:(e:React.MouseEvent<HTMLAnchorElement | HTMLDivElement,MouseEvent>)=>void
 } & NativeProps
 
