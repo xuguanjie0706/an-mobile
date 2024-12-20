@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile --ignore-scripts
       # 运行构建脚本
-      - name: Build vitepress site
+      - name: Build dumi site
         run: pnpm docs:build
         env:
           DOC_ENV: preview
@@ -43,4 +43,4 @@ jobs:
           # 部署到 gh-pages 分支
           target_branch: gh-pages
           # 部署目录为 vitepress 的默认输出目录
-          build_dir: docs/.vitepress/dist
+          build_dir: docs-dist
