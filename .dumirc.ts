@@ -2,7 +2,7 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   outputPath: 'docs-dist',
-  base:"/an-mobile/",
+  publicPath:"/an-mobile/",
   themeConfig: {
     name: 'an-mobile',
     logo: false,
