@@ -1,11 +1,9 @@
-import { createContext } from "react";
-import { CheckboxValue } from ".";
-
-
+import { createContext } from 'react'
+import { CheckboxValue } from '.'
 
 export const CheckboxGroupContext = createContext<{
-    value: CheckboxValue[],
-    disabled: boolean,
-    check: (value: CheckboxValue) => void,
-    uncheck: (value: CheckboxValue) => void,
+  value: CheckboxValue[]
+  disabled: boolean
+  check: (val: CheckboxValue) => void
+  uncheck: (val: CheckboxValue) => void
 } | null>(null)

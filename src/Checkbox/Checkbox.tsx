@@ -15,7 +15,7 @@ const classPrefix = 'adm-checkbox'
 
 export type CheckboxValue = string | number
 
-export type CheckBoxProps = {
+export type CheckboxProps = {
     checked?: boolean
     defaultChecked?: boolean
     disabled?: boolean
@@ -37,13 +37,13 @@ export type CheckboxRef = {
 
 
 
-const defaultProps: CheckBoxProps = {
+const defaultProps: CheckboxProps = {
   checked: false,
   defaultChecked: false,
   disabled: false,
 }
 
-export const CheckBox = forwardRef<CheckboxRef, CheckBoxProps>((p, ref) => {
+export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((p, ref) => {
     const groupContext = useContext(CheckboxGroupContext)
   const props = mergeProps(defaultProps, p)
 

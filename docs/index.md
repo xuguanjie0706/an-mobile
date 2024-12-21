@@ -1,9 +1,9 @@
 ---
 hero:
   title: library
-  description: A react library developed with dumi
+  description: A react library developed with dumi 
   actions:
-    - text: Hello
+    - text: 组件
       link: /
     - text: World
       link: /
@@ -19,4 +19,3 @@ features:
     description: Put ! description here
 ---
 
-an-mobile

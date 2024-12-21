@@ -10,7 +10,7 @@ type Config = {
       }
     popup?: {
     destroyOnClose?: boolean
-    }
+    },
 }
 
 

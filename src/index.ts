@@ -68,12 +68,12 @@ export type { InputProps } from './Input';
 export { default as Popup } from './Popup';
 export type { PopupProps } from './Popup';
 
+export { default as Checkbox } from './Checkbox';
+export type { CheckboxProps } from './Checkbox';
 
 
-
-
-
-
+export { default as Switch } from './Switch';
+export type { SwitchProps } from './Switch';
 
 
 

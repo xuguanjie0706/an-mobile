@@ -1,9 +1,11 @@
+import './Checkbox.less'
+import { attachPropertiesToComponent } from '../utils/attach-properties-to-component'
+import { Group } from './Group'
+import { Checkbox } from './Checkbox'
 
-import { attachPropertiesToComponent } from 'an-mobile/utils/attach-properties-to-component'
-import './CheckBox.less'
+export type { CheckboxValue, CheckboxProps, CheckboxRef } from './Checkbox'
+export type { CheckboxGroupProps } from './Group'
 
-export type { CheckBoxProps,CheckboxRef,CheckboxValue } from './CheckBox'
-
-export default attachPropertiesToComponent(CheckBox, {
-  Group: CheckBoxGroup,
+export default attachPropertiesToComponent(Checkbox, {
+  Group,
 })
