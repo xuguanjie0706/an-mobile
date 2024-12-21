@@ -42,4 +42,7 @@ jobs:
           # 部署到 gh-pages 分支
           target_branch: gh-pages
           # 部署目录为 vitepress 的默认输出目录
-          build_dir: docs-dist
+          # build_dir: ./docs-dist
+          # 部署到 github pages 的根目录
+          publish_dir: ./docs-dist
+          # 部署到 github pages 的根目录
