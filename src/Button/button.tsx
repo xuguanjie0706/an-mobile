@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import './button.less';
 
+import { NativeProps } from 'an-mobile/utils/native-props';
 import type {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
@@ -24,36 +25,42 @@ type NativeButtonProps = DetailedHTMLProps<
 const classPrefix = `adm-button`;
 
 export type ButtonProps = {
-  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
-  type: 'button' | 'submit' | 'reset';
+  color?: 'default' | 'primary' | 'success' | 'warning' | 'danger';
+  fill?: 'solid' | 'outline' | 'none';
   size?: 'mini' | 'small' | 'middle' | 'large';
-  disabled?: boolean;
+  block?: boolean;
   loading?: boolean | 'auto';
+  loadingText?: string;
+  loadingIcon?: ReactNode;
+  disabled?: boolean;
   onClick?: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void | Promise<void>;
-  children?: ReactNode;
-  loadingIcon?: ReactNode;
-  loadingText?: string | ReactNode;
-  fill?: 'solid' | 'outline' | 'none';
+  type?: 'submit' | 'reset' | 'button';
   shape?: 'default' | 'rounded' | 'rectangular';
-  block?: boolean;
+  children?: ReactNode;
 } & Pick<
   NativeButtonProps,
   'onMouseDown' | 'onMouseUp' | 'onTouchStart' | 'onTouchEnd' | 'id'
->;
+> &
+  NativeProps<
+    | '--text-color'
+    | '--background-color'
+    | '--border-radius'
+    | '--border-width'
+    | '--border-style'
+    | '--border-color'
+  >;
 
 const defaultProps: ButtonProps = {
-  color: 'primary',
-  type: 'button',
-  size: 'middle',
-  disabled: false,
-  loading: false,
+  color: 'default',
   fill: 'solid',
-  shape: 'default',
   block: false,
-  onClick: () => {},
+  loading: false,
   // loadingIcon: <DotLoading color='currentColor' />,
+  type: 'button',
+  shape: 'default',
+  size: 'middle',
 };
 
 export type ButtonRef = {
