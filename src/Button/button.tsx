@@ -92,7 +92,6 @@ const Button = forwardRef<ButtonRef, ButtonProps>((p, ref) => {
 
   return (
     <button
-      // eslint-disable-next-line react/button-has-type
       type={props.type}
       onClick={handleClick}
       disabled={disabled}
