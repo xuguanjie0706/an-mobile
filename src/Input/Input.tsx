@@ -1,151 +1,167 @@
+import { useConfig } from 'an-mobile/ConfigProvider';
+import { bound } from 'an-mobile/utils/bound';
+import { isIOS } from 'an-mobile/utils/validate';
+import { CloseCircleFill } from 'antd-mobile-icons';
+import classNames from 'classnames';
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import { NativeProps, withNativeProps } from '../utils/native-props';
+import { usePropsValue } from '../utils/use-props-value';
+import { mergeProps } from '../utils/with-default-props';
+import useInputHandleKeyDown from './useInputHandleKeyDown';
 
-
-
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
-import classNames from 'classnames'
-import { NativeProps, withNativeProps } from '../utils/native-props'
-import { mergeProps } from '../utils/with-default-props'
-import { CloseCircleFill } from 'antd-mobile-icons'
-import { useConfig } from 'an-mobile/ConfigProvider'
-import { usePropsValue } from '../utils/use-props-value'
-import { bound } from 'an-mobile/utils/bound'
-import { isIOS } from 'an-mobile/utils/validate'
-
-const classPrefix = 'adm-input'
-
+const classPrefix = 'adm-input';
 
 type NativeInputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
->
+>;
 type AriaProps = {
-    // These props currently are only used internally. They are not exported to users:
-    role?: string
-  }
+  // These props currently are only used internally. They are not exported to users:
+  role?: string;
+};
 
-export type InputProps =Pick<
-NativeInputProps,
-| 'maxLength'
-| 'minLength'
-| 'autoComplete'
-| 'autoFocus'
-| 'pattern'
-| 'inputMode'
-| 'type'
-| 'name'
-| 'onFocus'
-| 'onBlur'
-| 'onPaste'
-| 'autoCapitalize'
-| 'autoCorrect'
-| 'onKeyDown'
-| 'onKeyUp'
-| 'onCompositionStart'
-| 'onCompositionEnd'
-| 'onClick'
-| 'step'
-| 'id'
-| 'placeholder'
-| 'readOnly'
-| 'disabled'
-| 'enterKeyHint'
+export type InputProps = Pick<
+  NativeInputProps,
+  | 'maxLength'
+  | 'minLength'
+  | 'autoComplete'
+  | 'autoFocus'
+  | 'pattern'
+  | 'inputMode'
+  | 'type'
+  | 'name'
+  | 'onFocus'
+  | 'onBlur'
+  | 'onPaste'
+  | 'autoCapitalize'
+  | 'autoCorrect'
+  | 'onKeyDown'
+  | 'onKeyUp'
+  | 'onCompositionStart'
+  | 'onCompositionEnd'
+  | 'onClick'
+  | 'step'
+  | 'id'
+  | 'placeholder'
+  | 'readOnly'
+  | 'disabled'
+  | 'enterKeyHint'
 > & {
-  value?: string
-  defaultValue?: string
-  onChange?: (val: string) => void
-  clearable?: boolean
-  clearIcon?: React.ReactNode
-  onlyShowClearWhenFocus?: boolean
-  onClear?: () => void
-  onEnterPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void
-  min?: number
-  max?: number
-  id?: string
+  value?: string;
+  defaultValue?: string;
+  onChange?: (val: string) => void;
+  clearable?: boolean;
+  clearIcon?: React.ReactNode;
+  onlyShowClearWhenFocus?: boolean;
+  onClear?: () => void;
+  onEnterPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  min?: number;
+  max?: number;
+  id?: string;
 } & NativeProps<
-  '--font-size' | '--color' | '--placeholder-color' | '--text-align'
-> & AriaProps
+    '--font-size' | '--color' | '--placeholder-color' | '--text-align'
+  > &
+  AriaProps;
 
 export type InputRef = {
-  clear: () => void
-  focus: () => void
-  blur: () => void
-  nativeElement: HTMLInputElement | null
-}
+  clear: () => void;
+  focus: () => void;
+  blur: () => void;
+  nativeElement: HTMLInputElement | null;
+};
 
 const defaultProps = {
   defaultValue: '',
   clearIcon: <CloseCircleFill />,
   onlyShowClearWhenFocus: true,
-}
+};
 
 export const Input = forwardRef<InputRef, InputProps>((p, ref) => {
- 
-  const { locale, input: componentConfig = {} } = useConfig()
-  const props = mergeProps(defaultProps,componentConfig, p)
-  const [value, setValue] = usePropsValue(props)
-  const [hasFocus, setHasFocus] = useState(false)
-  const compositionRef = useRef(false)
-  const compositionStartRef = useRef(false)
-  const nativeInputRef = useRef<HTMLInputElement>(null)
+  const { locale, input: componentConfig = {} } = useConfig();
+  const props = mergeProps(defaultProps, componentConfig, p);
+  const [value, setValue] = usePropsValue(props);
+  const [hasFocus, setHasFocus] = useState(false);
+  const compositionRef = useRef(false);
+  const compositionStartRef = useRef(false);
+  const nativeInputRef = useRef<HTMLInputElement>(null);
+
+  const handleKeydown = useInputHandleKeyDown({
+    onEnterPress: props.onEnterPress,
+    onKeyDown: props.onKeyDown,
+    nativeInputRef,
+    enterKeyHint: props.enterKeyHint,
+  });
 
   useImperativeHandle(ref, () => ({
     clear: () => {
       if (nativeInputRef.current) {
-        nativeInputRef.current.value = ''
+        nativeInputRef.current.value = '';
       }
-      props.onChange?.('')
+      props.onChange?.('');
     },
     focus: () => {
-        nativeInputRef.current?.focus()
+      nativeInputRef.current?.focus();
     },
     blur: () => {
-        nativeInputRef.current?.blur()
+      nativeInputRef.current?.blur();
     },
     get nativeElement() {
-        return nativeInputRef.current
-      },
-  }))
+      return nativeInputRef.current;
+    },
+  }));
 
-  function checkValue(){
-    let nextValue = value
-    if(props.type==='number'){
-       const boundValue = nextValue && bound(parseFloat(nextValue),props.min,props.max).toString()
-       if(Number(boundValue) !== Number(nextValue)){
-        nextValue = boundValue
-       }
+  function checkValue() {
+    let nextValue = value;
+    if (props.type === 'number') {
+      const boundValue =
+        nextValue &&
+        bound(parseFloat(nextValue), props.min, props.max).toString();
+      if (Number(boundValue) !== Number(nextValue)) {
+        nextValue = boundValue;
+      }
     }
-    if(nextValue!==value){
-        setValue(nextValue)
+    if (nextValue !== value) {
+      setValue(nextValue);
     }
+  }
+
+  const shouldShowClear = (() => {
+    if (!props.clearable || !value || props.readOnly) return false;
+    if (props.onlyShowClearWhenFocus) {
+      return hasFocus;
+    } else {
+      return true;
     }
+  })();
 
-    const shouldShowClear = (() => {
-        if (!props.clearable || !value || props.readOnly) return false
-        if (props.onlyShowClearWhenFocus) {
-          return hasFocus
-        } else {
-          return true
-        }
-      })()
-
-
-  return withNativeProps(props,
-    <div className={classNames(classPrefix, props.disabled && `${classPrefix}-disabled`)}>
+  return withNativeProps(
+    props,
+    <div
+      className={classNames(
+        classPrefix,
+        props.disabled && `${classPrefix}-disabled`,
+      )}
+    >
       <input
         ref={nativeInputRef}
         className={`${classPrefix}-element`}
         value={value}
-        onChange={e => {
-           setValue(e.target.value)
+        onChange={(e) => {
+          setValue(e.target.value);
         }}
-        onFocus={(e)=>{
-            setHasFocus(true)
-            props.onFocus?.(e)
+        onFocus={(e) => {
+          setHasFocus(true);
+          props.onFocus?.(e);
         }}
-        onBlur={(e)=>{
-            setHasFocus(false)
-            checkValue()
-            props.onBlur?.(e)
+        onBlur={(e) => {
+          setHasFocus(false);
+          checkValue();
+          props.onBlur?.(e);
         }}
         onPaste={props.onPaste}
         id={props.id}
@@ -164,15 +180,15 @@ export const Input = forwardRef<InputRef, InputProps>((p, ref) => {
         name={props.name}
         autoCapitalize={props.autoCapitalize}
         autoCorrect={props.autoCorrect}
-        onKeyDown={props.onKeyDown}
+        onKeyDown={handleKeydown}
         onKeyUp={props.onKeyUp}
-        onCompositionStart={(e)=>{
-            compositionRef.current = true
-            props.onCompositionStart?.(e)
+        onCompositionStart={(e) => {
+          compositionRef.current = true;
+          props.onCompositionStart?.(e);
         }}
-        onCompositionEnd={(e)=>{
-            compositionRef.current = false
-            props.onCompositionEnd?.(e)
+        onCompositionEnd={(e) => {
+          compositionRef.current = false;
+          props.onCompositionEnd?.(e);
         }}
         onClick={props.onClick}
         step={props.step}
@@ -181,26 +197,21 @@ export const Input = forwardRef<InputRef, InputProps>((p, ref) => {
         aria-valuemax={props['aria-valuemax']}
         aria-valuemin={props['aria-valuemin']}
         aria-label={props['aria-label']}
-       
-       
-       
-       
-       
       />
       {shouldShowClear && (
         <div
           className={`${classPrefix}-clear`}
-          onMouseDown={e => {
-            e.preventDefault()
+          onMouseDown={(e) => {
+            e.preventDefault();
           }}
           onClick={() => {
-            setValue('')
-            props.onClear?.()
+            setValue('');
+            props.onClear?.();
 
             // https://github.com/ant-design/ant-design-mobile/issues/5212
             if (isIOS() && compositionStartRef.current) {
-              compositionStartRef.current = false
-              nativeInputRef.current?.blur()
+              compositionStartRef.current = false;
+              nativeInputRef.current?.blur();
             }
           }}
           aria-label={locale.Input.clear}
@@ -208,6 +219,6 @@ export const Input = forwardRef<InputRef, InputProps>((p, ref) => {
           {props.clearIcon}
         </div>
       )}
-    </div>
-  )
-})
+    </div>,
+  );
+});

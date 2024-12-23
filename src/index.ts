@@ -71,3 +71,6 @@ export type { SwitchProps } from './Switch';
 
 export { default as TextArea } from './TextArea';
 export type { TextAreaProps } from './TextArea';
+
+export { default as SearchBar } from './SearchBar';
+export type { SearchBarProps, SearchBarRef } from './SearchBar';
