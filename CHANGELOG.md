@@ -7,7 +7,3 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 - textarea ([9a874f1](https://github.com/xuguanjie0706/an-mobile/commit/9a874f16a82d836321a4b5829303d7897ee8bd37))
-
-### [0.0.6](https://github.com/xuguanjie0706/an-mobile/compare/v0.0.5...v0.0.6) (2024-12-22)
-
-### [0.0.5](https://github.com/xuguanjie0706/an-mobile/compare/v0.0.4...v0.0.5) (2024-12-22)
