@@ -77,3 +77,10 @@ export type { SearchBarProps, SearchBarRef } from './SearchBar';
 
 export { default as ProgressBar } from './ProgressBar';
 export type { ProgressBarProps } from './ProgressBar';
+
+export { default as ErrorBlock, createErrorBlock } from './ErrorBlock';
+export type {
+  ErrorBlockProps,
+  ErrorBlockStatus,
+  ImageRecord,
+} from './ErrorBlock';

@@ -1,9 +1,7 @@
 ---
 group: 信息展示
+order: 1
 ---
-
-
-
 
 # Avatar 头像
 
@@ -21,11 +19,11 @@ group: 信息展示
 
 ### 属性
 
-| 属性 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| fallback | 占位图 | `ReactNode` | 默认占位图 |
-| fit | 图片填充模式 | `'contain' \| 'cover' \| 'fill' \| 'none' \| 'scale-down'` | `'cover'` |
-| src | 头像的图片地址 | `string` | - |
+| 属性     | 说明           | 类型                                                       | 默认值     |
+| -------- | -------------- | ---------------------------------------------------------- | ---------- |
+| fallback | 占位图         | `ReactNode`                                                | 默认占位图 |
+| fit      | 图片填充模式   | `'contain' \| 'cover' \| 'fill' \| 'none' \| 'scale-down'` | `'cover'`  |
+| src      | 头像的图片地址 | `string`                                                   | -          |
 
 此外，还支持 [Image](/zh/components/image) 组件的 `alt` `lazy` `onClick` `onError` `onLoad` 属性。
 
