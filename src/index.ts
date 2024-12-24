@@ -74,3 +74,6 @@ export type { TextAreaProps } from './TextArea';
 
 export { default as SearchBar } from './SearchBar';
 export type { SearchBarProps, SearchBarRef } from './SearchBar';
+
+export { default as ProgressBar } from './ProgressBar';
+export type { ProgressBarProps } from './ProgressBar';

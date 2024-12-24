@@ -1,0 +1,40 @@
+.adm-progress-bar {
+  // 进度条宽度
+  --track-width: var(--adm-progress-bar-track-width);
+  // 进度条颜色
+  --track-color: var(--adm-progress-bar-track-color, var(--adm-color-border));
+  // 进度条填充颜色
+  --fill-color: var(--adm-progress-bar-fill-color, var(--adm-color-primary));
+  // 进度文字宽度
+  --text-width: var(--adm-progress-bar-text-width, 40px);
+
+  display: flex;
+  align-items: center;
+
+  &-trail {
+    flex: auto;
+    background: var(--track-color);
+    overflow: hidden;
+    height: var(--track-width);
+  }
+
+  &-fill {
+    transition: width 0.3s;
+    background: var(--fill-color);
+    height: var(--track-width);
+  }
+
+  &-text {
+    flex: none;
+    width: calc(var(--text-width) + 8px);
+    padding-left: 8px;
+    color: var(--adm-color-weak);
+  }
+
+  &-rounded {
+    .adm-progress-bar-trail,
+    .adm-progress-bar-fill {
+      border-radius: var(--track-width);
+    }
+  }
+}
